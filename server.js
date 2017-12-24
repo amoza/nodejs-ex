@@ -3,10 +3,10 @@ var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
   var request = require('request'); 
-var FileCookieStore = require('tough-cookie-filestore');
+//var FileCookieStore = require('tough-cookie-filestore');
 // NOTE - currently the 'cookies.json' file must already exist!
-var j = request.jar(new FileCookieStore('cookie.json'));
-request = request.defaults({ jar : j })
+//var j = request.jar(new FileCookieStore('cookie.json'));
+//request = request.defaults({ jar : j })
 
   
 Object.assign=require('object-assign')
