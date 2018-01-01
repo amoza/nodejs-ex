@@ -3,6 +3,18 @@ var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
   var request = require('request'); 
+  var compression = require('compression');
+  app.use(compression({filter: shouldCompress}))
+
+function shouldCompress (req, res) {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses with this request header
+    return false
+  }
+
+  // fallback to standard filter function
+  return compression.filter(req, res)
+}
 //var FileCookieStore = require('tough-cookie-filestore');
 // NOTE - currently the 'cookies.json' file must already exist!
 //var j = request.jar(new FileCookieStore('cookie.json'));
