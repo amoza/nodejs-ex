@@ -3,8 +3,8 @@ var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
   var request = require('request'); 
-  var compression = require('compression');
-  app.use(compression({filter: shouldCompress}))
+ // var compression = require('compression');
+ // app.use(compression({filter: shouldCompress}))
 
 function shouldCompress (req, res) {
   if (req.headers['x-no-compression']) {
@@ -13,7 +13,7 @@ function shouldCompress (req, res) {
   }
 
   // fallback to standard filter function
-  return compression.filter(req, res)
+  //return compression.filter(req, res)
 }
 //var FileCookieStore = require('tough-cookie-filestore');
 // NOTE - currently the 'cookies.json' file must already exist!
