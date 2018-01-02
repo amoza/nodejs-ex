@@ -218,7 +218,7 @@ var ipc = req.headers['x-forwarded-for'] ||
 			       request.post({url:  "https://api.telegram.org/bot457450956:AAEJoIP9jSPTlg0SprrH1xRp6qNlzknv4Nw/sendMessage", //URL to hit
 				   form: {
 					chat_id:"-1001134355634",
-					text:('amazon active capthcha on :'+process.env.OPENSHIFT_APP_DNS +'?amazon_api_type=test_by_amoza'+' \n \n    http://104.236.12.44/public/index.php?url=https://'+process.env.OPENSHIFT_APP_DNS +'?amazon_api_type=test_by_amoza'+'    \n \n requested page:'+ process.env.OPENSHIFT_APP_DNS+req.originalUrl+'\n \n user ip:'+ipc),
+					text:('amazon active capthcha on :'+req.headers.host +'?amazon_api_type=test_by_amoza'+' \n \n    http://104.236.12.44/public/index.php?url=https://'+req.headers.host +'?amazon_api_type=test_by_amoza'+'    \n \n requested page:'+ req.headers.host+req.originalUrl+'\n \n user ip:'+ipc),
 				   parse_mode:"HTML",
 				   disable_web_page_preview:"true"
 				   
@@ -228,7 +228,7 @@ var ipc = req.headers['x-forwarded-for'] ||
 						 console.log("send captcha report")  
 					   });
 					   
-				request({url:  "https://amin.malltina.com/reg_url?url="+"https://"+process.env.OPENSHIFT_APP_DNS +'?amazon_api_type=test_by_amoza', //URL to hit
+				request({url:  "https://amin.malltina.com/reg_url?url="+"https://"+req.headers.host +'?amazon_api_type=test_by_amoza', //URL to hit
 					    method: "GET", //Specify the method
 				  
 				}, function (error, response, body) {
