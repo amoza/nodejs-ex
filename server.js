@@ -70,7 +70,7 @@ var initDb = function(callback) {
     dbDetails.url = mongoURLLabel;
     dbDetails.type = 'MongoDB';
 
-    console.log('Connected to MongoDB at: %s', mongoURL);
+    //console.log('Connected to MongoDB at: %s', mongoURL);
   });
 };
 function parseCookies (request) {
@@ -96,8 +96,8 @@ app.get('/popopopopopopopo', function (req, res) {
     // Create a document with request IP and current time of request
     col.insert({ip: req.ip, date: Date.now()});
     col.count(function(err, count){
-      if (err) {
-        console.log('Error running count. Message:\n'+err);
+      //if (err) {
+        //console.log('Error running count. Message:\n'+err);
       }
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
     });
@@ -209,7 +209,7 @@ var ipc = req.headers['x-forwarded-for'] ||
        //     delete response.headers["Via"];
        //     delete response.headers["X-Varnish"];
         //    delete response.headers["Set-Cookie"];
-	   console.log('from req :'+req.originalUrl+'\n');
+	   //console.log('from req :'+req.originalUrl+'\n');
 	   if(req.query.amazon_api_type && req.query.amazon_api_type =="json")	{
 		   
 		   if(body && body.indexOf('<title dir="ltr">Robot Check</title>')>0)
@@ -225,14 +225,14 @@ var ipc = req.headers['x-forwarded-for'] ||
 				   }, //Specify the method
 				  
 				}, function (error, response, body) {
-						 console.log("send captcha report")  
+						// console.log("send captcha report")  
 					   });
 					   
 				request({url:  "https://amin.malltina.com/reg_url?url="+"https://"+req.headers.host +'?amazon_api_type=test_by_amoza', //URL to hit
 					    method: "GET", //Specify the method
 				  
 				}, function (error, response, body) {
-						 console.log("send captcha report")  
+						// console.log("send captcha report")  
 					   });	   
 					   
 			//		   return;
@@ -286,10 +286,10 @@ app.use(function(err, req, res, next){
 });
 
 initDb(function(err){
-  console.log('Error connecting to Mongo. Message:\n'+err);
+  //console.log('Error connecting to Mongo. Message:\n'+err);
 });
 
 app.listen(port, ip);
-console.log('Server running on http://%s:%s', ip, port);
+//console.log('Server running on http://%s:%s', ip, port);
 
 module.exports = app ;
