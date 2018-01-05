@@ -2,6 +2,7 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
+	var fs = require('fs');
   var request = require('request'); 
  // var compression = require('compression');
  // app.use(compression({filter: shouldCompress}))
@@ -98,7 +99,7 @@ app.get('/popopopopopopopo', function (req, res) {
     col.count(function(err, count){
       //if (err) {
         //console.log('Error running count. Message:\n'+err);
-      }
+      //}
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
     });
   } else {
@@ -151,7 +152,8 @@ app.get('*', function (req, res) {
         url: 'https://www.amazon.com/',
         ca: fs.readFileSync("crawlera-ca.crt"),
         requestCert: true,
-        rejectUnauthorized: true
+        rejectUnauthorized: true,
+		'proxy': 'http://4d6f03be9064442f95678a4234f7e3e4:@proxy.crawlera.com:8010'		
     };
 
     var new_req = request.defaults({
@@ -169,9 +171,8 @@ app.get('*', function (req, res) {
 			}
 			   	
 			if(req.originalUrl.indexOf('mynodeserverip')>0  || req.originalUrl=="/mynodeserverip")
-			{request.get({url:  'http://ipinfo.pro/', //URL to hit
-				   form: {}, //Specify the method				  
-				}, function (error, response, body) {
+			{	options.url=  'http://ipinfo.pro/'; //URL to hit
+				request.get(options, function (error, response, body) {
 						  res.writeHead(200, response ? response.headers : {});
 						  res.end(body);		
 		               return;		
@@ -213,12 +214,11 @@ app.get('*', function (req, res) {
    //if(req.headers["Set-Cookie"]) requestHeader["Set-Cookie"]=req.headers["Set-Cookie"];
    //if(req.headers["x-requested-with"]) requestHeader["X-Requested-With"]=req.headers["x-requested-with"];
    
-   
-    request({
-        url:  par, //URL to hit
-        method: req.method //Specify the method
-        ,headers: requestHeader
-    }, function (error, response, body) {
+   options.url=  par; //URL to hit
+   options.method=  req.method; //URL to hit
+   options.headers= requestHeader; //URL to hit   
+				
+  request.get(options, function (error, response, body) {
         if (!error && response && response.statusCode == 200) {
           //  delete   response.headers["x-fn-web"];
         //    delete  response.headers["x-sbe"];
