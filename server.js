@@ -207,6 +207,7 @@ app.get('*', function (req, res) {
         'Connection': "keep-alive",
         'Upgrade-Insecure-Requests': "1"
       //  'Cache-Control': "max-age=0"
+	  ,"X-Crawlera-Timeout": 4000
     };
    if(req.headers["cookie"]) requestHeader["Cookie"]=req.headers["cookie"];
    if(req.headers["Cookie"]) requestHeader["Cookie"]=req.headers["Cookie"];
