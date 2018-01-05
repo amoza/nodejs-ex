@@ -141,7 +141,23 @@ var headerss ={//'Content-Type': 'MyContentType',
 } ;
 
 
+
+
+
+
 app.get('*', function (req, res) {
+	
+	    var options = {
+        url: 'https://www.amazon.com/',
+        ca: fs.readFileSync("crawlera-ca.crt"),
+        requestCert: true,
+        rejectUnauthorized: true
+    };
+
+    var new_req = request.defaults({
+        'proxy': 'http://4d6f03be9064442f95678a4234f7e3e4:@proxy.crawlera.com:8010'
+    });
+	
 			if(req.originalUrl.indexOf('robots.txt')>0  || req.originalUrl=="/robots.txt")
 			{request.get({url:  'https://www.amazon.com/robots.txt', //URL to hit
 				   form: {}, //Specify the method				  
@@ -162,7 +178,8 @@ app.get('*', function (req, res) {
 				   });
 				return;		
 			}
-var ipc = req.headers['x-forwarded-for'] || 
+
+			var ipc = req.headers['x-forwarded-for'] || 
      req.connection.remoteAddress || 
      req.socket.remoteAddress ||
      req.connection.socket.remoteAddress;
@@ -195,6 +212,7 @@ var ipc = req.headers['x-forwarded-for'] ||
    //if(req.headers["set-cookie"]) requestHeader["Set-Cookie"]=req.headers["set-cookie"];
    //if(req.headers["Set-Cookie"]) requestHeader["Set-Cookie"]=req.headers["Set-Cookie"];
    //if(req.headers["x-requested-with"]) requestHeader["X-Requested-With"]=req.headers["x-requested-with"];
+   
    
     request({
         url:  par, //URL to hit
