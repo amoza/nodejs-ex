@@ -153,11 +153,11 @@ app.get('*', function (req, res) {
         ca: fs.readFileSync("crawlera-ca.crt"),
         requestCert: true,
         rejectUnauthorized: true,
-		'proxy': 'http://4d6f03be9064442f95678a4234f7e3e4:@proxy.crawlera.com:8010'		
+		'proxy': 'http://a85febc2b8454806a84b70aa52d2fc9d:@proxy.crawlera.com:8010'		
     };
 
     var new_req = request.defaults({
-        'proxy': 'http://4d6f03be9064442f95678a4234f7e3e4:@proxy.crawlera.com:8010'
+        'proxy': 'http://a85febc2b8454806a84b70aa52d2fc9d:@proxy.crawlera.com:8010'
     });
 	
 			if(req.originalUrl.indexOf('robots.txt')>0  || req.originalUrl=="/robots.txt")
